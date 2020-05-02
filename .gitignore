@@ -1,0 +1,10 @@
+*.tlog
+bin
+cmake_install.cmake
+CMake*
+!CMakeLists.txt
+samples/hellovr_opengl/Debug/
+.vs
+src/openvr_api64.dir/
+x64/
+*.vcxproj*

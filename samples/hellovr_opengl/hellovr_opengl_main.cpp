@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <string>
 #include <cstdlib>
+#include <thread>
+#include <chrono>
 
 #include <openvr.h>
 
@@ -800,6 +802,8 @@ void CMainApplication::RunMainLoop()
 	while ( !bQuit )
 	{
 		bQuit = HandleInput();
+
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 
         // we don't need the followings for a background process application
 		//RenderFrame();
