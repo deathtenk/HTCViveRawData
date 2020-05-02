@@ -17,12 +17,15 @@
 #include <cstdlib>
 #include <thread>
 #include <chrono>
+#include <iostream>
 
 #include <openvr.h>
 
 #include "shared/lodepng.h"
 #include "shared/Matrices.h"
 #include "shared/pathtools.h"
+
+#include <nlohmann/json.hpp>
 
 #if defined(POSIX)
 #include "unistd.h"
@@ -78,7 +81,6 @@ public:
 
 	bool BInit();
 	bool BInitCompositor();
-
 	void Shutdown();
 
 	void RunMainLoop();
@@ -289,7 +291,7 @@ CMainApplication::CMainApplication( int argc, char *argv[] )
 CMainApplication::~CMainApplication()
 {
 	// work is done in Shutdown
-	dprintf( "Shutdown" );
+	dprintf( "Shutdown", 0 );
 }
 
 
@@ -496,11 +498,26 @@ void CMainApplication::printDevicePositionalData(const char * deviceName, vr::Hm
                        // measure small time intervals that occur on the same system or virtual machine.
     QueryPerformanceCounter(&qpc);
 
+	nlohmann::json j1 = { {"timestamp", qpc.QuadPart},
+		                  {"deviceName",deviceName},
+		                  {"x",position.v[0]},
+		                  {"y",position.v[1]},
+		                  {"z",position.v[2]},
+		                  {"qw",quaternion.w},
+		                  {"qx",quaternion.x},
+		                  {"qy",quaternion.y},
+		                  {"qz",quaternion.z} };
+
+
+	dprintf(j1.dump().c_str(), 0);
+
     // Print position and quaternion (rotation).
-    dprintf("\n%lld, %s, x = %.5f, y = %.5f, z = %.5f, qw = %.5f, qx = %.5f, qy = %.5f, qz = %.5f",
-        qpc.QuadPart, deviceName,
-        position.v[0], position.v[1], position.v[2],
-        quaternion.w, quaternion.x, quaternion.y, quaternion.z);
+
+
+    //dprintf("\n%lld, %s, x = %.5f, y = %.5f, z = %.5f, qw = %.5f, qx = %.5f, qy = %.5f, qz = %.5f",
+    //    qpc.QuadPart, deviceName,
+    //    position.v[0], position.v[1], position.v[2],
+    //    quaternion.w, quaternion.x, quaternion.y, quaternion.z);
 
 
     // Uncomment this if you want to print entire transform matrix that contains both position and rotation matrix.
