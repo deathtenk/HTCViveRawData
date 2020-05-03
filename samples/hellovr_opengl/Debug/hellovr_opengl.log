@@ -1,2 +1,7 @@
 ﻿  hellovr_opengl_main.cpp
+C:\Users\djh2t\projects\vr\HTCViveRawData\samples\hellovr_opengl\hellovr_opengl_main.cpp(220,12): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
+          with
+          [
+              _Rep=std::chrono::system_clock::rep
+          ]
   hellovr_opengl.vcxproj -> C:\Users\djh2t\projects\vr\HTCViveRawData\samples\hellovr_opengl\..\bin\win32\hellovr_opengl.exe

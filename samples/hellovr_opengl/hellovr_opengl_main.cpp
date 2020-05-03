@@ -26,6 +26,7 @@
 #include "shared/pathtools.h"
 
 #include <nlohmann/json.hpp>
+#include <filesystem>
 
 #if defined(POSIX)
 #include "unistd.h"
@@ -47,6 +48,9 @@ void ThreadSleep( unsigned long nMilliseconds )
 	usleep( nMilliseconds * 1000 );
 #endif
 }
+
+namespace fs = std::filesystem;
+
 
 class CGLRenderModel
 {
@@ -82,6 +86,7 @@ public:
 	bool BInit();
 	bool BInitCompositor();
 	void Shutdown();
+	fs::path getUserID();
 
 	void RunMainLoop();
 
@@ -90,7 +95,7 @@ public:
     void printPositionalData();
     void printDevicePositionalData(const char* deviceName, vr::HmdMatrix34_t poseMatrix, vr::HmdVector3_t position, vr::HmdQuaternion_t quaternion);
 	bool HandleInput();
-	void ProcessVREvent( const vr::VREvent_t & event );
+	void ProcessVREvent(const vr::VREvent_t& event);
 
 private: 
 	bool m_bDebugOpenGL;
@@ -198,6 +203,25 @@ private: // OpenGL bookkeeping
 	std::vector< CGLRenderModel * > m_vecRenderModels;
 	CGLRenderModel *m_rTrackedDeviceToRenderModel[ vr::k_unMaxTrackedDeviceCount ];
 };
+
+//-----------------------------------------------------------------------------
+// Purpose: Returns Steam UserID
+//-----------------------------------------------------------------------------
+
+fs::path CMainApplication::getUserID()
+{
+	long latest = 0;
+	std::string path = "C:\\Program Files (x86)\\Steam\\userdata";
+	fs::path result;
+
+	for (const auto& entry : fs::directory_iterator(path))
+	{
+		long cur = fs::last_write_time(entry).time_since_epoch().count();
+		if (latest < cur)
+			result = entry.path().filename();
+	}
+	return result;
+}
 
 //-----------------------------------------------------------------------------
 // Purpose: Outputs a set of optional arguments to debugging output, using
@@ -497,9 +521,11 @@ void CMainApplication::printDevicePositionalData(const char * deviceName, vr::Hm
                        // From MSDN: "QPC is typically the best method to use to time-stamp events and 
                        // measure small time intervals that occur on the same system or virtual machine.
     QueryPerformanceCounter(&qpc);
+	std::string uid = CMainApplication::getUserID().u8string();
 
 	nlohmann::json j1 = { {"timestamp", qpc.QuadPart},
 		                  {"deviceName",deviceName},
+		                  {"SteamUserID",uid},
 		                  {"x",position.v[0]},
 		                  {"y",position.v[1]},
 		                  {"z",position.v[2]},
