@@ -53,6 +53,9 @@
     <ClInclude Include="..\shared\strtools.h">
       <Filter>Shared</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\headers\WinReg.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -28,6 +28,8 @@
 #include <nlohmann/json.hpp>
 #include <filesystem>
 
+#include <WinReg.hpp>
+
 #if defined(POSIX)
 #include "unistd.h"
 #endif
@@ -50,6 +52,7 @@ void ThreadSleep( unsigned long nMilliseconds )
 }
 
 namespace fs = std::filesystem;
+
 
 
 class CGLRenderModel
@@ -522,8 +525,12 @@ void CMainApplication::printDevicePositionalData(const char * deviceName, vr::Hm
                        // measure small time intervals that occur on the same system or virtual machine.
     QueryPerformanceCounter(&qpc);
 	std::string uid = CMainApplication::getUserID().u8string();
-
+	
+	winreg::RegKey key(HKEY_CURRENT_USER, L"Software\\Valve\\Steam");
+	DWORD appID = key.GetDwordValue(L"RunningAppID");
+	
 	nlohmann::json j1 = { {"timestamp", qpc.QuadPart},
+		                  {"appID",appID},
 		                  {"deviceName",deviceName},
 		                  {"SteamUserID",uid},
 		                  {"x",position.v[0]},
@@ -536,6 +543,7 @@ void CMainApplication::printDevicePositionalData(const char * deviceName, vr::Hm
 
 
 	dprintf(j1.dump().c_str(), 0);
+	dprintf("\n", 0);
 
     // Print position and quaternion (rotation).
 
