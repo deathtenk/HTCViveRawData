@@ -21,6 +21,7 @@
 
 #include <openvr.h>
 
+#include "cpr/cpr.h"
 #include "shared/lodepng.h"
 #include "shared/Matrices.h"
 #include "shared/pathtools.h"

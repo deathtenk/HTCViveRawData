@@ -1,7 +1,14 @@
-﻿  hellovr_opengl_main.cpp
-C:\Users\djh2t\projects\vr\HTCViveRawData\samples\hellovr_opengl\hellovr_opengl_main.cpp(222,12): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
+﻿  lodepng.cpp
+  Matrices.cpp
+  pathtools.cpp
+  strtools.cpp
+C:\Users\djh2t\projects\vr\HTCViveRawData\samples\shared\strtools.cpp(146,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  hellovr_opengl_main.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include\cstdbool(22,23): warning C4996: '_Header_cstdbool': warning STL4004: <ccomplex>, <cstdalign>, <cstdbool>, and <ctgmath> are deprecated in C++17. You can define _SILENCE_CXX17_C_HEADER_DEPRECATION_WARNING or _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS to acknowledge that you have received this warning.
+C:\Users\djh2t\projects\vr\HTCViveRawData\samples\hellovr_opengl\hellovr_opengl_main.cpp(223,12): warning C4244: 'initializing': conversion from '_Rep' to 'long', possible loss of data
           with
           [
               _Rep=std::chrono::system_clock::rep
           ]
+  Generating Code...
   hellovr_opengl.vcxproj -> C:\Users\djh2t\projects\vr\HTCViveRawData\samples\hellovr_opengl\..\bin\win32\hellovr_opengl.exe

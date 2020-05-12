@@ -55,7 +55,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_CRT_NONSTDC_NO_DEPRECATE;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..;../../headers;../thirdparty/glew/glew-1.11.0/include;../thirdparty/sdl2-2.0.3/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;../../headers;../thirdparty/glew/glew-1.11.0/include;../thirdparty/cpr/include;../thirdparty/sdl2-2.0.3/include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -96,6 +96,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\headers\WinReg.hpp" />
+    <ClInclude Include="..\cpr\include\cpr\api.h" />
+    <ClInclude Include="..\cpr\include\cpr\auth.h" />
+    <ClInclude Include="..\cpr\include\cpr\body.h" />
+    <ClInclude Include="..\cpr\include\cpr\connect_timeout.h" />
+    <ClInclude Include="..\cpr\include\cpr\cookies.h" />
+    <ClInclude Include="..\cpr\include\cpr\cpr.h" />
+    <ClInclude Include="..\cpr\include\cpr\cprtypes.h" />
+    <ClInclude Include="..\cpr\include\cpr\curlholder.h" />
+    <ClInclude Include="..\cpr\include\cpr\defines.h" />
+    <ClInclude Include="..\cpr\include\cpr\digest.h" />
+    <ClInclude Include="..\cpr\include\cpr\error.h" />
+    <ClInclude Include="..\cpr\include\cpr\limit_rate.h" />
+    <ClInclude Include="..\cpr\include\cpr\low_speed.h" />
+    <ClInclude Include="..\cpr\include\cpr\max_redirects.h" />
+    <ClInclude Include="..\cpr\include\cpr\multipart.h" />
+    <ClInclude Include="..\cpr\include\cpr\parameters.h" />
+    <ClInclude Include="..\cpr\include\cpr\payload.h" />
+    <ClInclude Include="..\cpr\include\cpr\proxies.h" />
+    <ClInclude Include="..\cpr\include\cpr\response.h" />
+    <ClInclude Include="..\cpr\include\cpr\session.h" />
+    <ClInclude Include="..\cpr\include\cpr\ssl_options.h" />
+    <ClInclude Include="..\cpr\include\cpr\status_codes.h" />
+    <ClInclude Include="..\cpr\include\cpr\timeout.h" />
+    <ClInclude Include="..\cpr\include\cpr\unix_socket.h" />
+    <ClInclude Include="..\cpr\include\cpr\user_agent.h" />
+    <ClInclude Include="..\cpr\include\cpr\util.h" />
+    <ClInclude Include="..\cpr\include\cpr\verbose.h" />
     <ClInclude Include="..\shared\lodepng.h" />
     <ClInclude Include="..\shared\Matrices.h" />
     <ClInclude Include="..\shared\pathtools.h" />
