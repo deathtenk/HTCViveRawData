@@ -43,6 +43,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\bin\win32\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>C:\vcpkg-2019.08\buildtrees\curl\x86-windows-rel\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -62,8 +64,9 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>openvr_api.lib;glew32.lib;SDL2.lib;SDL2main.lib;glu32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>openvr_api.lib;glew32.lib;SDL2.lib;SDL2main.lib;glu32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libcurl_a.lib;Ws2_32.lib;Crypt32.lib;Wldap32.lib;Normaliz.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\thirdparty\glew\glew-1.11.0\lib\Release\Win32;..\thirdparty\sdl2-2.0.3\bin\win32;..\..\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/NODEFAULTLIB:LIBCMT %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -92,6 +95,20 @@
     <ClCompile Include="..\shared\Matrices.cpp" />
     <ClCompile Include="..\shared\pathtools.cpp" />
     <ClCompile Include="..\shared\strtools.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\auth.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\cookies.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\cprtypes.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\digest.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\error.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\multipart.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\parameters.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\payload.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\proxies.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\session.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\ssl_options.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\timeout.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\unix_socket.cpp" />
+    <ClCompile Include="..\thirdparty\cpr\cpr\util.cpp" />
     <ClCompile Include="hellovr_opengl_main.cpp" />
   </ItemGroup>
   <ItemGroup>

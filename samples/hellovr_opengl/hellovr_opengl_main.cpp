@@ -1,5 +1,8 @@
 //========= Copyright Valve Corporation ============//
 
+#define CURL_STATICLIB
+#include <curl/curl.h>
+
 #include <SDL.h>
 #include <GL/glew.h>
 #include <SDL_opengl.h>
@@ -53,7 +56,6 @@ void ThreadSleep( unsigned long nMilliseconds )
 }
 
 namespace fs = std::filesystem;
-
 
 
 class CGLRenderModel
@@ -234,7 +236,7 @@ fs::path CMainApplication::getUserID()
 void dprintf( const char *fmt, ... )
 {
 	va_list args;
-	char buffer[ 2048 ];
+	char buffer[ 4096 ];
 
 	va_start( args, fmt );
 	vsprintf_s( buffer, fmt, args );
@@ -533,7 +535,7 @@ void CMainApplication::printDevicePositionalData(const char * deviceName, vr::Hm
 	nlohmann::json j1 = { {"timestamp", qpc.QuadPart},
 		                  {"appID",appID},
 		                  {"deviceName",deviceName},
-		                  {"SteamUserID",uid},
+		                  {"steamUserID",uid},
 		                  {"x",position.v[0]},
 		                  {"y",position.v[1]},
 		                  {"z",position.v[2]},
@@ -542,9 +544,15 @@ void CMainApplication::printDevicePositionalData(const char * deviceName, vr::Hm
 		                  {"qy",quaternion.y},
 		                  {"qz",quaternion.z} };
 
-
-	dprintf(j1.dump().c_str(), 0);
+	auto r = cpr::Post(cpr::Url{ "http://192.168.0.240:8080/vr" },
+		               cpr::Body{j1.dump()},
+		               cpr::Header{ {"Content-Type","application/json"} });
+	dprintf(r.text.c_str(), 0);
 	dprintf("\n", 0);
+
+
+	// dprintf(j1.dump().c_str(), 0);
+	// dprintf("\n", 0);
 
     // Print position and quaternion (rotation).
 
